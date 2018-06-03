@@ -1,20 +1,44 @@
 <!DOCTYPE html>
+
 <head>
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <style>
-    .ball { fill: #d62728; stroke: #000; stroke-width: 1px; }
+    .bar {
+      fill: rgb(180, 120, 70);
+    }
 
-    .bar rect { fill: #1f77b4; fill-opacity: 0.8; }
-    .bar text { fill: white; }
+    .ball {
+      fill: #d69f27;
+      stroke: #000;
+      stroke-width: 1px;
+    }
 
-    .line { fill: #636363; fill-opacity: 0.5; }
+    .bar rect {
+      fill: #d69f27;
+      fill-opacity: 0.8;
+    }
 
-    .axis path { stroke: #636363; stroke-width: 3px; }
-    .axis text { fill: #636363; }
+    .bar text {
+      fill: white;
+    }
+
+    .line {
+      fill: #636363;
+      fill-opacity: 0.5;
+    }
+
+    .axis path {
+      stroke: #000000;
+      stroke-width: 3px;
+    }
+
+    .axis text {
+      fill: #070064;
+    }
 
     body {
-      font-family: Verdana,Arial,sans-serif;
+      font-family: Verdana, Arial, sans-serif;
     }
 
     h2 {
@@ -27,11 +51,12 @@
       margin-left: 10px;
       margin-right: 10px;
     }
+
     .slidecontainer {
       width: 100%;
-  }
+    }
 
-  .slider {
+    .slider {
       -webkit-appearance: none;
       width: 25%;
       height: 25px;
@@ -40,230 +65,356 @@
       opacity: 0.7;
       -webkit-transition: .2s;
       transition: opacity .2s;
-  }
+    }
 
-  .slider:hover {
+    .slider:hover {
       opacity: 1;
-  }
+    }
 
-  .slider::-webkit-slider-thumb {
+    .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 25px;
       height: 25px;
       background: #4CAF50;
       cursor: pointer;
-  }
+    }
 
-  .slider::-moz-range-thumb {
+    .slider::-moz-range-thumb {
       width: 25px;
       height: 25px;
       background: #4CAF50;
       cursor: pointer;
-  }
-.labelfont{
-  font-weight: bold;
-  font-size: 25px;
-}
+    }
 
-
+    .labelfont {
+      font-weight: bold;
+      font-size: 25px;
+    }
   </style>
 
 </head>
-<body bgcolor="#e1f7f4">
-  <div align = "center">
 
-    <h1> Central Limit Theorem Simmulation </h1>
+<body bgcolor="#e1f7f4">
+  <div align="left">
+
+    <h1 align="center"> Central Limit Theorem Simmulation
+      <br/>
+      <br/> </h1>
+
+    <h2 align="left">Definition:</h2>
+    In probability theory, the central limit theorem (CLT) establishes that, in most situations, when independent random variables
+    are added, their properly normalized sum tends toward a normal distribution (informally a "bell curve") even if the original
+    variables themselves are not normally distributed. For example, suppose that a sample is obtained containing a large
+    number of observations, each observation being randomly generated in a way that does not depend on the values of the
+    other observations, and that the arithmetic average of the observed values is computed. If this procedure is performed
+    many times, the central limit theorem says that the computed values of the average will be distributed according to a
+    normal distribution. A simple example of this is that if one flips a coin many times the probability of getting a given
+    number of heads in a series of flips will approach a normal curve, with mean equal to half the total number of flips
+    in each series. (In the limit of an infinite number of flips, it will equal a normal curve.)
+    <br/>
+    <br/>
+    <h2>Example:
+      <br/>
+      <br/>
+    </h2>
+    As an example, say that we have a dairy farm that has 1000 cows and with exactly 100 cows in each bucket that is categorized
+    based on their productivity of milk in gallons. Population distribution is, as following pic shows, a uniform distribution.
+    <br/>
+    <br/>
+    <div id="UniformDistribution" align="center">
+      <h2 aligh="center">Distribution of Cow milk Productivity</h2>
+    </div>
+    <br/>
+    <br/> According to Central Limit Theorem(CLT), If we randomly draw a given sample size from these uniforma distribution population
+    and normalizing the productivity, it will form a normal distribution as shown in below graph ( to the nearest bucket).
+    <br/>
+    <br/>
+    <div id="NormalDistribution" align="center">
+      <h2 aligh="center">Normal Distribution of normalized cow milk Productivity</h2>
+    </div>
   </div>
   <div>
-      <div>
-        <br/> <br/>
-        <button id="StartSimulation" style="font-size: 150%; height:75px;width:250px" ><b id ="buttonText">Start Simulation</b></button>
-        <br/> <br/> <br/> <br/>
-      </div>
-      <div id ="samplesize" class = "SlideContainer">
-        <p>
-          <label for = "SampleSize" class ="labelfont">
-            Sample Size : <span id ="SampleValue">4</span>
-          </label>
-        <input id="value" type="range" min ="2" max="10" value = "4" class = "slider">
+    <div>
+      <br/>
+      <br/>
+      <h2>Simmulation of CLT: </h2>
+      <br/>
+      <br/> Following section shows the simmulation of random draw and its formation of normal distribution.
+      <br/>
+      <br/>
+      <button id="StartSimulation" style="font-size: 150%; height:75px;width:250px">
+        <b id="buttonText">Start Simulation</b>
+      </button>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+    </div>
+    <div id="samplesize" class="SlideContainer">
+      <p>
+        <label for="SampleSize" class="labelfont">
+          Sample Size :
+          <span id="SampleValue">4</span>
+        </label>
+        <input id="value" type="range" min="2" max="10" value="4" class="slider">
       </p>
-      </div>
-      <br/> <br/> <br/> <br/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </div>
-
-
-  <br/> <br/> <br/> <br/>
-  <div id ="CentralLimit" align = "center"></div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <div id="CentralLimit" align="center"></div>
   <script>
+    var margin = { top: 20, right: 10, bottom: 20, left: 10 };
+    var width = 1000 - margin.left - margin.right,
+      height = 900 - margin.top - margin.bottom;
 
-  var margin = {top: 20, right: 10, bottom: 20, left: 10};
-   var width = 1000 - margin.left - margin.right,
-       height = 900 - margin.top - margin.bottom;
+    var xx1 = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+    var yx1 = d3.scaleLinear().range([height / 2, 0]);
 
-   var svg = d3.select("#CentralLimit")
-     .append("svg")
-       .attr("width", width + margin.left + margin.right)
-       .attr("height", height + margin.top + margin.bottom)
-     .append("g")
-       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg1 = d3.select("#UniformDistribution")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height / 2 + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   var dt = 1000, // time step
-       stopped = 1,
-       n = 4; // sample size
+    d3.csv("NormalData.csv", function (error, dataset) {
 
-   var f = {
-     sample: Math.random,
-     mu: 1/2,
-     sigma: 1/(2*Math.sqrt(3))
-   };
+      xx1.domain(dataset.map(function (d) { return d.CowMilkProductivity }));
+      yx1.domain([0, d3.max(dataset, function (d) { return d.NoOfCows; })]);
 
-   d3.select("#value").on("input", function(){
 
-     update(+this.value);
-   })
-   function update(samplenumber){
-     d3.select("#SampleValue").text(samplenumber);
-     d3.select("#SampleSize").property("value", samplenumber);
-     n= samplenumber;
-   }
-   var pdf = function(x) { return Math.sqrt(n)*Math.exp(-n*(x-f.mu)*(x-f.mu)/(2*f.sigma*f.sigma))/Math.sqrt(2*Math.PI)/f.sigma; };
+      var yaxis = d3.axisLeft()
+        .scale(yx1);
+      svg1.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(25,0)")
+        .call(yaxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -25)
+        .attr("text-anchor", "end")
+        .text("No. Of. Cows");
+      var xaxis = d3.axisBottom()
+        .scale(xx1);
+      svg1.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(25," + height / 2 + ")")
+        .call(d3.axisBottom(xx1))
+        .append("text")
+        .attr("transform", "translate(" + width / 2 + ",  )")
+        .attr("y", 10)
+        .attr("dy", "0.71em")
+        .text("ProductivityInGallons");
 
-   var x = d3.scaleLinear()
-     .domain([0, 1])
-     .rangeRound([0, width]);
+      svg1.selectAll(".bar")
+        .data(dataset)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("transform", "translate(25,0)")
+        .attr("x", function (d) { return xx1(d.CowMilkProductivity); })
+        .attr("y", function (d) { return yx1(d.NoOfCows); })
+        .attr("width", xx1.bandwidth())
+        .attr("height", function (d) { return height / 2 - yx1(d.NoOfCows); });
 
-   var y1 = height/3,
-       y2 = height/2;
+    });
 
-   var y = d3.scaleLinear()
-     .domain([0, pdf(f.mu)])
-     .range([0, height - y2]);
 
-   var histogram = d3.histogram()
-     .domain(x.domain())
-     .thresholds(x.ticks(20));
 
-   var area = d3.area()
-     .x(function(d) { return x(d[0])})
-     .y0(y2)
-     .y1(function(d) { return y2 + y(d[1])})
-     .curve(d3.curveBasis);
+    var xx2 = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+    var yx2 = d3.scaleLinear().range([height / 2, 0]);
 
-   svg.append("path").attr("class", "line");
-   svg.append("g").attr("class", "bars");
+    var svg2 = d3.select("#NormalDistribution")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height / 2 + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   var counts = [];
+    d3.csv("NormalData_nr.csv", function (error, dataset1) {
+      dataset1.forEach(function (d) {
+        d.prod = parseInt(d.Nor_CowMilkProductivity);
+        d.freq = parseInt(d.Nor_NoOfCows);
+      });
 
-   var axis = svg.selectAll(".axis")
-       .data([{y: 0, label: "RandomDraw"}, {y: y1, label: "MeanOfRandomSample"}, {y: y2, label: "DistributionOfSamples"}])
-     .enter().append("g")
-       .attr("class", "axis")
-       .attr("transform", function(d) { return "translate(0," + d.y + ")"; });
+      xx2.domain(dataset1.map(function (d) {
+        return d.prod;
+      }));
+      yx2.domain([0, d3.max(dataset1, function (d) {
+        return d.freq + 30;
+      })]);
 
-   axis.append("path")
-     .attr("d", function(d) { return "M0,0H" + width; })
 
-   axis.append("text")
-     .attr("dominant-baseline", "hanging")
-     .attr("dy", 20)
-     .text(function(d) { return d.label; });
+      svg2.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(25,0)")
+        .call(d3.axisLeft(yx2))
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -25)
+        .attr("text-anchor", "end")
+        .text("No. Of. Cows");
 
-   function renderBars() {
-     var data = histogram(counts)
-       .map(d => { d.y = counts.length > 0 ? d.length/counts.length : 0; return d; })
-       .filter(d => d.x1 > d.x0);
+      svg2.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(25," + height / 2 + ")")
+        .call(d3.axisBottom(xx2))
+        .append("text")
+        .attr("transform", "translate(" + width / 2 + ",  )")
+        .attr("y", 10)
+        .attr("dy", "0.71em")
+        .text("ProductivityInGallons");
 
-     var ymax = d3.max(data, function(d) { return d.y; });
-     y.domain([0, ymax / (1/20)]);
+      svg2.selectAll(".bar")
+        .data(dataset1)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("transform", "translate(25,0)")
+        .attr("x", function (d) { return xx2(d.prod); })
+        .attr("y", function (d) { return yx2(d.freq); })
+        .attr("width", xx2.bandwidth())
+        .attr("height", function (d) { return height / 2 - yx2(d.freq); });
 
-     var bar = svg.select(".bars").selectAll(".bar").data(data);
+    });
 
-     var g = bar.enter().append("g")
-       .attr("class", "bar")
-       .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y2 + ")"; });
 
-     g.append("rect")
-       .attr("width", function(d) { return (x(d.x1) - x(d.x0)) - 2; });
 
-     g.append("text")
-       .attr("x", x(1/40))
-       .attr("dy", 20)
-       .attr("dominant-baseline", "hanging")
-       .attr("text-anchor", "middle");
 
-     bar.select("rect").transition().duration(dt/4)
-       .attr("height", function(d) { return y(d.y / (1/20)); });
-
-     bar.select("text")
-       .text(function(d) { return d.y > 0 ? d3.format(".0%")(d.y) : ""; });
-
-     svg.select(".line").datum(d3.range(0, 1.05, 0.05).map(function(x) { return [x, pdf(x)]; }))
-       .transition().duration(dt/4)
-         .attr("d", area);
-   }
-
-   function renderBalls() {
-     var data = d3.range(n).map(f.sample);
-     var mean = d3.mean(data);
-
-     var ball = svg.append("g").selectAll(".ball").data(data);
-
-     var i = 0;
-     ball.enter().append("rect")
-       .attr("class", "ball")
-       .attr("x", function(d) { return x(d); })
-       .attr("y", 0)
-       .attr("width", 10)
-       .attr("height", 10)
-     .transition().duration(dt).ease(d3.easeBounce)
-       .attr("y", y1 - 5)
-       .on("end", function() {
-         d3.select(this)
-           .transition().duration(dt/4)
-             .attr("y", (y2 + y1) / 2)
-           .transition().duration(dt/4)
-             .attr("x", x(mean))
-           .transition().duration(dt/4).ease(d3.easeBounce)
-             .attr("y", y2 - 3)
-             .attr("width", 5)
-             .attr("height", 5)
-             .each(function() { ++i; })
-             .on("end", function() {
-               if (!--i) {
-                 counts.push(mean);
-               } else {
-                 d3.select(this).remove();
-               };
-             });
-       });
-   }
-
-   function renderAll() {
-     if(!stopped){
-     renderBars();
-     renderBalls();
-   }
-   }
-
-   d3.select('#StartSimulation').on("click", function(){
+    var svg = d3.select("#CentralLimit")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var dt = 1000, // time step
+      stopped = 1,
+      n = 4; // sample size
+    var f = {
+      sample: Math.random,
+      mu: 1 / 2,
+      sigma: 1 / (2 * Math.sqrt(3))
+    };
+    d3.select("#value").on("input", function () {
+      update(+this.value);
+    })
+    function update(samplenumber) {
+      d3.select("#SampleValue").text(samplenumber);
+      d3.select("#SampleSize").property("value", samplenumber);
+      n = samplenumber;
+    }
+    var pdf = function (x) { return Math.sqrt(n) * Math.exp(-n * (x - f.mu) * (x - f.mu) / (2 * f.sigma * f.sigma)) / Math.sqrt(2 * Math.PI) / f.sigma; };
+    var x = d3.scaleLinear()
+      .domain([0, 1])
+      .rangeRound([0, width]);
+    var y1 = height / 3,
+      y2 = height / 2;
+    var y = d3.scaleLinear()
+      .domain([0, pdf(f.mu)])
+      .range([0, height - y2]);
+    var histogram = d3.histogram()
+      .domain(x.domain())
+      .thresholds(x.ticks(20));
+    var area = d3.area()
+      .x(function (d) { return x(d[0]) })
+      .y0(y2)
+      .y1(function (d) { return y2 + y(d[1]) })
+      .curve(d3.curveBasis);
+    svg.append("path").attr("class", "line");
+    svg.append("g").attr("class", "bars");
+    var counts = [];
+    var axis = svg.selectAll(".axis")
+      .data([{ y: 0, label: "RandomDraw" }, { y: y1, label: "MeanOfRandomSample" }, { y: y2, label: "DistributionOfSamples" }])
+      .enter().append("g")
+      .attr("class", "axis")
+      .attr("transform", function (d) { return "translate(0," + d.y + ")"; });
+    axis.append("path")
+      .attr("d", function (d) { return "M0,0H" + width; })
+    axis.append("text")
+      .attr("dominant-baseline", "hanging")
+      .attr("dy", 20)
+      .text(function (d) { return d.label; });
+    function renderBars() {
+      var data = histogram(counts)
+        .map(d => { d.y = counts.length > 0 ? d.length / counts.length : 0; return d; })
+        .filter(d => d.x1 > d.x0);
+      var ymax = d3.max(data, function (d) { return d.y; });
+      y.domain([0, ymax / (1 / 20)]);
+      var bar = svg.select(".bars").selectAll(".bar").data(data);
+      var g = bar.enter().append("g")
+        .attr("class", "bar")
+        .attr("transform", function (d) { return "translate(" + x(d.x0) + "," + y2 + ")"; });
+      g.append("rect")
+        .attr("width", function (d) { return (x(d.x1) - x(d.x0)) - 2; });
+      g.append("text")
+        .attr("x", x(1 / 40))
+        .attr("dy", 20)
+        .attr("dominant-baseline", "hanging")
+        .attr("text-anchor", "middle");
+      bar.select("rect").transition().duration(dt / 4)
+        .attr("height", function (d) { return y(d.y / (1 / 20)); });
+      bar.select("text")
+        .text(function (d) { return d.y > 0 ? d3.format(".0%")(d.y) : ""; });
+      svg.select(".line").datum(d3.range(0, 1.05, 0.05).map(function (x) { return [x, pdf(x)]; }))
+        .transition().duration(dt / 4)
+        .attr("d", area);
+    }
+    function renderBalls() {
+      var data = d3.range(n).map(f.sample);
+      var mean = d3.mean(data);
+      var ball = svg.append("g").selectAll(".ball").data(data);
+      var i = 0;
+      ball.enter().append("rect")
+        .attr("class", "ball")
+        .attr("x", function (d) { return x(d); })
+        .attr("y", 0)
+        .attr("width", 10)
+        .attr("height", 10)
+        .transition().duration(dt).ease(d3.easeBounce)
+        .attr("y", y1 - 5)
+        .on("end", function () {
+          d3.select(this)
+            .transition().duration(dt / 4)
+            .attr("y", (y2 + y1) / 2)
+            .transition().duration(dt / 4)
+            .attr("x", x(mean))
+            .transition().duration(dt / 4).ease(d3.easeBounce)
+            .attr("y", y2 - 3)
+            .attr("width", 5)
+            .attr("height", 5)
+            .each(function () { ++i; })
+            .on("end", function () {
+              if (!--i) {
+                counts.push(mean);
+              } else {
+                d3.select(this).remove();
+              };
+            });
+        });
+    }
+    function renderAll() {
+      if (!stopped) {
+        renderBars();
+        renderBalls();
+      }
+    }
+    d3.select('#StartSimulation').on("click", function () {
       var text1 = document.getElementById("buttonText").innerHTML;
-
-      if(text1 == "Start Simulation"){
-      document.getElementById("buttonText").innerHTML = "Stop Simulation";
-      stopped =0;
-
-    }
-    else {
-      document.getElementById("buttonText").innerHTML = "Start Simulation";
-      stopped =1;
-    }
-   });
-
-
-
-
-   d3.interval(renderAll, dt);
-
+      if (text1 == "Start Simulation") {
+        document.getElementById("buttonText").innerHTML = "Stop Simulation";
+        stopped = 0;
+      }
+      else {
+        document.getElementById("buttonText").innerHTML = "Start Simulation";
+        stopped = 1;
+      }
+    });
+    d3.interval(renderAll, dt);
   </script>
 </body>
